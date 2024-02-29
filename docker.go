@@ -320,12 +320,18 @@ func (d *docker) createContainer(
 	ports NamedPorts,
 	cfg *Options,
 ) (*container.CreateResponse, error) {
+	vols := make(map[string]struct{})
+	for _, v := range cfg.Volumes {
+		vols[v] = struct{}{}
+	}
+
 	exposedPorts := d.exposedPorts(ports)
 	containerConfig := &container.Config{
 		Image:        image,
 		ExposedPorts: exposedPorts,
 		Env:          cfg.Env,
 		Labels:       cfg.Labels,
+		Volumes:      vols,
 	}
 
 	if len(cfg.Cmd) > 0 {

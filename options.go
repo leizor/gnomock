@@ -254,6 +254,12 @@ func WithLabels(lbls map[string]string) Option {
 	}
 }
 
+func WithVolumes(vols []string) Option {
+	return func(o *Options) {
+		o.Volumes = vols
+	}
+}
+
 // Options includes Gnomock startup configuration. Functional options
 // (WithSomething) should be used instead of directly initializing objects of
 // this type whenever possible.
@@ -336,6 +342,8 @@ type Options struct {
 	CapAdd []string `json:"capAdd"`
 
 	Labels map[string]string `json:"labels"`
+
+	Volumes []string `json:"volumes"`
 
 	ctx                 context.Context
 	init                InitFunc
