@@ -2,6 +2,7 @@ package gnomock
 
 import (
 	"context"
+	"github.com/docker/docker/api/types/container"
 	"io"
 	"time"
 )
@@ -260,6 +261,12 @@ func WithVolumes(vols []string) Option {
 	}
 }
 
+func WithNetworkMode(mode container.NetworkMode) Option {
+	return func(o *Options) {
+		o.NetworkMode = mode
+	}
+}
+
 // Options includes Gnomock startup configuration. Functional options
 // (WithSomething) should be used instead of directly initializing objects of
 // this type whenever possible.
@@ -344,6 +351,8 @@ type Options struct {
 	Labels map[string]string `json:"labels"`
 
 	Volumes []string `json:"volumes"`
+
+	NetworkMode container.NetworkMode `json:"networkMode"`
 
 	ctx                 context.Context
 	init                InitFunc

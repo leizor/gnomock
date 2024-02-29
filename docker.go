@@ -359,6 +359,7 @@ func (d *docker) createContainer(
 		Mounts:       mounts,
 		ExtraHosts:   cfg.ExtraHosts,
 		CapAdd:       cfg.CapAdd,
+		NetworkMode:  cfg.NetworkMode,
 	}
 
 	nwConfig, err := d.findNetworkingConfig(ctx, cfg)
