@@ -242,6 +242,12 @@ func WithNetworkID(nwID string) Option {
 	}
 }
 
+func WithCapAdd(val []string) Option {
+	return func(o *Options) {
+		o.CapAdd = val
+	}
+}
+
 // Options includes Gnomock startup configuration. Functional options
 // (WithSomething) should be used instead of directly initializing objects of
 // this type whenever possible.
@@ -318,6 +324,10 @@ type Options struct {
 
 	// NetworkID is the ID of a custom network the container should attach to.
 	NetworkID string `json:"networkID"`
+
+	// List of kernel capabilities to add to the container.
+	// See https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities.
+	CapAdd []string `json:"capAdd"`
 
 	ctx                 context.Context
 	init                InitFunc

@@ -351,6 +351,7 @@ func (d *docker) createContainer(
 		Privileged:   cfg.Privileged,
 		Mounts:       mounts,
 		ExtraHosts:   cfg.ExtraHosts,
+		CapAdd:       cfg.CapAdd,
 	}
 
 	nwConfig, err := d.findNetworkingConfig(ctx, cfg)
