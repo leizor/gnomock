@@ -242,9 +242,15 @@ func WithNetworkID(nwID string) Option {
 	}
 }
 
-func WithCapAdd(val []string) Option {
+func WithCapAdd(capAdd []string) Option {
 	return func(o *Options) {
-		o.CapAdd = val
+		o.CapAdd = capAdd
+	}
+}
+
+func WithLabels(lbls map[string]string) Option {
+	return func(o *Options) {
+		o.Labels = lbls
 	}
 }
 
@@ -328,6 +334,8 @@ type Options struct {
 	// List of kernel capabilities to add to the container.
 	// See https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities.
 	CapAdd []string `json:"capAdd"`
+
+	Labels map[string]string `json:"labels"`
 
 	ctx                 context.Context
 	init                InitFunc

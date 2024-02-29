@@ -325,6 +325,7 @@ func (d *docker) createContainer(
 		Image:        image,
 		ExposedPorts: exposedPorts,
 		Env:          cfg.Env,
+		Labels:       cfg.Labels,
 	}
 
 	if len(cfg.Cmd) > 0 {
